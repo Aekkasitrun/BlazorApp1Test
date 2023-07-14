@@ -1,0 +1,73 @@
+﻿@page "/todolist"
+
+<h3>Todo List</h3>
+
+<input type="text" @bind="@newTodoItem" />
+<button @onclick="AddTodoItem">Add</button>
+
+<ul>
+    @foreach (var item in todoItems)
+    {
+        <li>
+            @if (item != editingItem)
+            {
+                <span>@item</span>
+                <button @onclick="() => EditTodoItem(item)">Edit</button>
+                <button @onclick="() => DeleteTodoItem(item)">Delete</button>
+            }
+            else
+            {
+                <input type="text" @bind="@editedTodoItem" />
+                <button @onclick="SaveEditedTodoItem">Save</button>
+                <button @onclick="CancelEdit">Cancel</button>
+            }
+        </li>
+    }
+</ul>
+
+@code {
+    private List<string> todoItems = new List<string>();
+    private string? newTodoItem;
+    private string? editingItem;
+    private string? editedTodoItem;
+
+    private void AddTodoItem()
+    {
+        if (!string.IsNullOrWhiteSpace(newTodoItem))
+        {
+            todoItems.Add(newTodoItem);
+            newTodoItem = string.Empty;
+        }
+    }
+
+    private void DeleteTodoItem(string item)
+    {
+        todoItems.Remove(item);
+        if (editingItem == item)
+        {
+            CancelEdit();
+        }
+    }
+
+    private void EditTodoItem(string item)
+    {
+        editingItem = item;
+        editedTodoItem = item;
+    }
+
+    private void SaveEditedTodoItem()
+    {
+        if (!string.IsNullOrWhiteSpace(editedTodoItem) && editingItem != null)
+        {
+            var index = todoItems.IndexOf(editingItem);
+            todoItems[index] = editedTodoItem!;
+            CancelEdit();
+        }
+    }
+
+    private void CancelEdit()
+    {
+        editingItem = null;
+        editedTodoItem = null;
+    }
+}
