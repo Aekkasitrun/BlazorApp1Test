@@ -10,6 +10,9 @@
             <th>
                 Amount
             </th>
+            <th>
+                Options
+            </th>
         </tr>
     </thead>
 
@@ -23,9 +26,6 @@
                 <td>
                     @entry.Amount
                 </td>
-                <td>
-                    <DeleteButton/>
-                </td>
             </tr>
         }
 
@@ -37,6 +37,10 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
+        allEntries = await budgetBookService.GetAllEntries();
+    }
+    private async void ReloadEntry()
+    {
         allEntries = await budgetBookService.GetAllEntries();
     }
 }

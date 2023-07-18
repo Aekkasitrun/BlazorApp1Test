@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
 
@@ -10,3 +11,60 @@
         await budgetBookService.DeleteEntry(newEntry);
     }
 }
+=======
+﻿@*@using BudgetBook.Data
+@inject BudgetBookService budgetBookService
+<button onclick="@DeleteEntry">Delete</button>
+
+
+
+@code {
+    Entry entryToDelete = new Entry();
+
+    protected async void DeleteEntry()
+    {
+        await budgetBookService.DeleteEntry(entryToDelete);
+    }
+}*@
+
+@using BudgetBook.Data
+@inject BudgetBookService budgetBookService
+
+<button @onclick="@OnDeleteEntry">Delete</button>
+
+@code {
+    [Parameter]
+    public Entry Entry { get; set; }
+    [Parameter]
+    public EventCallback<Entry> DeleteEntry { get; set; }
+    private async void OnDeleteEntry()
+    {
+        await budgetBookService.DeleteEntry(Entry);
+        await DeleteEntry.InvokeAsync(Entry);
+        // You can perform additional actions after deletion if needed.
+    }
+}
+
+
+@*@using BudgetBook.Data
+@inject BudgetBookService budgetBookService
+
+<!-- DeleteButton.razor -->
+<button @onclick="@(async () => await DeleteEntry())">Delete</button>
+
+@code {
+    [Parameter]
+    public Entry Entry { get; set; }
+
+    [Inject]
+    public BudgetBookService BudgetBookService { get; set; }
+
+    private async Task DeleteEntry()
+    {
+        await BudgetBookService.DeleteEntry(Entry);
+        // You can perform additional actions after deletion if needed.
+    }
+}*@
+
+
+>>>>>>> develop
