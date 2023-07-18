@@ -1,8 +1,61 @@
-﻿@page "/todolist"
+﻿@*@page "/todolist"*@
+@using BudgetBook.Data
+@inject BudgetBookService budgetBookService
 
 <h3>Todooo List</h3>
 
-<input type="text" @bind="@newTodoItem" />
+
+@*AddData*@
+<form>
+    <div class="row">
+        <div class="col">
+            <label class="control-label">Description</label>
+            <input class="form-control" @bind="@newEntry.Description" />
+        </div>
+        <div class="col">
+            <label class="control-label">Amount</label>
+            <input class="form-control" @bind="@newEntry.Amount" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <button class="btn btn-primary" @onclick="@CreateEntry">Add</button>
+        </div>
+    </div>
+</form>
+
+
+@*List*@
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                Description
+            </th>
+            <th>
+                Amount
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(Entry entry in allEntries)
+        {
+            <tr>
+                <td>
+                    @entry.Description
+                </td>
+                <td>
+                    @entry.Amount
+                </td>
+            </tr>
+        }
+       
+    </tbody>
+
+</table>
+
+@*<input type="text" @bind="@newTodoItem" />
 <button @onclick="AddTodoItem">Add</button>
 
 <ul>
@@ -24,50 +77,65 @@
         </li>
     }
 </ul>
-
+*@
 @code {
-    private List<string> todoItems = new List<string>();
-    private string? newTodoItem;
-    private string? editingItem;
-    private string? editedTodoItem;
+    //private List<string> todoItems = new List<string>();
+    //private string? newTodoItem;
+    //private string? editingItem;
+    //private string? editedTodoItem;
 
-    private void AddTodoItem()
+    //private void AddTodoItem()
+    //{
+    //    if (!string.IsNullOrWhiteSpace(newTodoItem))
+    //    {
+    //        todoItems.Add(newTodoItem);
+    //        newTodoItem = string.Empty;
+    //    }
+    //}
+
+    //private void DeleteTodoItem(string item)
+    //{
+    //    todoItems.Remove(item);
+    //    if (editingItem == item)
+    //    {
+    //        CancelEdit();
+    //    }
+    //}
+
+    //private void EditTodoItem(string item)
+    //{
+    //    editingItem = item;
+    //    editedTodoItem = item;
+    //}
+
+    //private void SaveEditedTodoItem()
+    //{
+    //    if (!string.IsNullOrWhiteSpace(editedTodoItem) && editingItem != null)
+    //    {
+    //        var index = todoItems.IndexOf(editingItem);
+    //        todoItems[index] = editedTodoItem!;
+    //        CancelEdit();
+    //    }
+    //}
+
+    //private void CancelEdit()
+    //{
+    //    editingItem = null;
+    //    editedTodoItem = null;
+    //}
+
+    List<Entry> allEntries = new List<Entry>();
+
+    Entry newEntry = new Entry();
+
+    protected override async Task OnInitializedAsync()
     {
-        if (!string.IsNullOrWhiteSpace(newTodoItem))
-        {
-            todoItems.Add(newTodoItem);
-            newTodoItem = string.Empty;
-        }
+        await base.OnInitializedAsync();
+        allEntries = await budgetBookService.GetAllEntries();
+    }
+    protected async void CreateEntry()
+    {
+        await budgetBookService.AddEntry(newEntry);
     }
 
-    private void DeleteTodoItem(string item)
-    {
-        todoItems.Remove(item);
-        if (editingItem == item)
-        {
-            CancelEdit();
-        }
-    }
-
-    private void EditTodoItem(string item)
-    {
-        editingItem = item;
-        editedTodoItem = item;
-    }
-
-    private void SaveEditedTodoItem()
-    {
-        if (!string.IsNullOrWhiteSpace(editedTodoItem) && editingItem != null)
-        {
-            var index = todoItems.IndexOf(editingItem);
-            todoItems[index] = editedTodoItem!;
-            CancelEdit();
-        }
-    }
-
-    private void CancelEdit()
-    {
-        editingItem = null;
-        editedTodoItem = null;
-    }
 }

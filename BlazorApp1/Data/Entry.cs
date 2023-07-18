@@ -1,4 +1,4 @@
-﻿namespace BlazorApp1.Data
+﻿namespace BudgetBook.Data
 {
     public class Entry
     {
