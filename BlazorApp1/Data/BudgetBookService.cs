@@ -3,10 +3,8 @@
     public class BudgetBookService
     {
         public int MyProperty { get; set; }
-        private static List<Entry> mockDb = new List<Entry>()
-        {
-            new Entry(){Description="Test",Amount=4.99m}
-        };
+        private static List<Entry> mockDb = new List<Entry>();
+       
         public async Task<bool> AddEntry(Entry newEntry)
         {
             try

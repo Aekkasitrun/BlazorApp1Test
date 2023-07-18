@@ -1,0 +1,28 @@
+﻿@using BudgetBook.Data
+@inject BudgetBookService budgetBookService
+
+<form>
+    <div class="row">
+        <div class="col">
+            <label class="control-label">Description</label>
+            <input class="form-control" @bind="@newEntry.Description" />
+        </div>
+        <div class="col">
+            <label class="control-label">Amount</label>
+            <input class="form-control" @bind="@newEntry.Amount" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <button class="btn btn-primary" @onclick="@CreateEntry">Add</button>
+        </div>
+    </div>
+</form>
+
+@code {
+    Entry newEntry = new Entry();
+    protected async void CreateEntry()
+    {
+        await budgetBookService.AddEntry(newEntry);
+    }
+}
