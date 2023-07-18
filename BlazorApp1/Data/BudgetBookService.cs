@@ -23,5 +23,19 @@
         {
             return await Task.FromResult(mockDb);
         }
+
+        public async Task<bool> DeleteEntry(Entry newEntry)
+        {
+            try
+            {
+                // Assuming mockDb is a collection that supports Remove() method, otherwise, adjust accordingly.
+                mockDb.Remove(newEntry);
+            }
+            catch (Exception)
+            {
+                return await Task.FromResult(false);
+            }
+            return await Task.FromResult(true);
+        }
     }
 }
