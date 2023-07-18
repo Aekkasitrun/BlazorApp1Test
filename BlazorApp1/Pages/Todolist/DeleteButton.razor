@@ -1,18 +1,4 @@
-<<<<<<< HEAD
-﻿@using BudgetBook.Data
-@inject BudgetBookService budgetBookService
-
-<button @onclick="@DeleteEntry">Delete</button>
-
-@code {
-    Entry newEntry = new Entry();
-    protected async void DeleteEntry()
-    {
-        await budgetBookService.DeleteEntry(newEntry);
-    }
-}
-=======
-﻿@*@using BudgetBook.Data
+@*@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
 <button onclick="@DeleteEntry">Delete</button>
 
@@ -66,5 +52,3 @@
     }
 }*@
 
-
->>>>>>> develop

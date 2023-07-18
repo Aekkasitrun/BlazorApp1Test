@@ -25,20 +25,12 @@
             return await Task.FromResult(mockDb);
         }
 
-<<<<<<< HEAD
-        public async Task<bool> DeleteEntry(Entry entryToDelete)
-=======
         public async Task<bool> DeleteEntry(Entry newEntry)
->>>>>>> develop
         {
             try
             {
                 // Assuming mockDb is a collection that supports Remove() method, otherwise, adjust accordingly.
-<<<<<<< HEAD
-                mockDb.Remove(entryToDelete);
-=======
                 mockDb.Remove(newEntry);
->>>>>>> develop
             }
             catch (Exception)
             {
