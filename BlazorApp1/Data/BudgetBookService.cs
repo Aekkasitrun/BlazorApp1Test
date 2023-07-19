@@ -4,7 +4,7 @@
     {
         public int MyProperty { get; set; }
         private static List<Entry> mockDb = new List<Entry>();
-       
+
         public async Task<bool> AddEntry(Entry newEntry)
         {
             try
@@ -15,11 +15,10 @@
             catch (Exception)
             {
                 return await Task.FromResult(false);
-                
+
             }
             return await Task.FromResult(true);
         }
-
         public async Task<List<Entry>> GetAllEntries()
         {
             return await Task.FromResult(mockDb);
