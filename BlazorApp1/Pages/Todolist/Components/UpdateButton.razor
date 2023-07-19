@@ -6,12 +6,12 @@
     <!-- Your edit form code here -->
     <input type="text" @bind="EditEntry.Description" />
     <input type="decimal" @bind="EditEntry.Amount" />
-    <button class="bi bi-save" style="border: none; background-color: transparent;" @onclick="SaveChanges"></button>
+    <button class="bi bi-save-fill" style="border: none; background-color: transparent; color: green" @onclick="SaveChanges"></button>
     <button class="bi bi-x-square" style="border: none; background-color: transparent;" @onclick="CancelEdit"></button>
 }
 else
 {
-    <button @onclick="ShowEditForm" class="bi bi-pen" style="border: none; background-color: transparent;"></button>
+    <button @onclick="ShowEditForm" class="bi bi-pen" style="border: none; background-color: transparent; "></button>
 }
 
 @code {

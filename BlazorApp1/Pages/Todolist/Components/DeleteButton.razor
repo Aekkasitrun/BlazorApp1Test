@@ -1,7 +1,7 @@
 ﻿@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
 
-<button class="bi bi-trash text-bg-danger" style="border: none; background-color: transparent;" @onclick="@OnDeleteEntry"></button>
+<button class="bi bi-trash text-bg-danger" style="border: none; background-color: transparent; color: red;" @onclick="@OnDeleteEntry"></button>
 
 @code {
     [Parameter]
