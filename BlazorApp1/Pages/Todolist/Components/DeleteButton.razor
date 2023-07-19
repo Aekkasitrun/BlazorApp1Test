@@ -6,6 +6,12 @@
 @code {
     [Parameter]
     public Entry Entry { get; set; }
+
+    public DeleteButton(Entry entry)
+    {
+        Entry = entry;
+    }
+
     [Parameter]
     public EventCallback<Entry> DeleteEntry { get; set; }
     private async void OnDeleteEntry()
