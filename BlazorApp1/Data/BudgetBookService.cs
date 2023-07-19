@@ -38,5 +38,34 @@
             }
             return await Task.FromResult(true);
         }
+
+        public async Task<bool> AddOrUpdateEntry(Entry entryToUpdate)
+        {
+            try
+            {
+                // Check if the entry exists in the mockDb.
+                var existingEntry = mockDb.FirstOrDefault(e => e.Amount == entryToUpdate.Amount);
+
+                if (existingEntry != null)
+                {
+                    // If the entry exists, update its properties with the new values.
+                    existingEntry.Description = entryToUpdate.Description;
+                    existingEntry.Amount = entryToUpdate.Amount;
+                    // Update other properties as needed.
+                }
+                else
+                {
+                    // If the entry does not exist, add the new entry to the mockDb.
+                    mockDb.Add(entryToUpdate);
+                }
+            }
+            catch (Exception)
+            {
+                return await Task.FromResult(false);
+            }
+
+            return await Task.FromResult(true);
+        }
+
     }
 }

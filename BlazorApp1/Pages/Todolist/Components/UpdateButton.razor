@@ -1,0 +1,55 @@
+﻿@using BudgetBook.Data
+@inject BudgetBookService budgetBookService
+
+@if (showEditForm)
+{
+    <!-- Your edit form code here -->
+    <input type="text" @bind="EditEntry.Description" />
+    <input type="decimal" @bind="EditEntry.Amount" />
+    <button class="bi bi-save-fill" style="border: none; background-color: transparent; color: green" @onclick="SaveChanges"></button>
+    <button class="bi bi-x-square" style="border: none; background-color: transparent;" @onclick="CancelEdit"></button>
+}
+else
+{
+    <button @onclick="ShowEditForm" class="bi bi-pen" style="border: none; background-color: transparent; "></button>
+}
+
+@code {
+   
+    private bool showEditForm = false;
+    private void ShowEditForm()
+    {
+        showEditForm = true;
+    }
+
+    //private async void SaveChanges()
+    //{
+    //    // Add your save logic here
+    //    // For example:
+    //    // Update your data model, call an API, etc.
+    //    await budgetBookService.AddOrUpdateEntry(editedEntry);
+    //    showEditForm = false;
+    //}
+
+    private void CancelEdit()
+    {
+        // Add your cancel logic here if needed
+        // For example:
+        // Revert changes, reset form, etc.
+
+        showEditForm = false;
+    }
+
+    [Parameter]
+    public Entry EditEntry { get; set; }
+    [Parameter]
+    public EventCallback<Entry> UpdateEntry { get; set; }
+    private async void SaveChanges()
+    {
+        await budgetBookService.AddOrUpdateEntry(EditEntry);
+        await UpdateEntry.InvokeAsync(EditEntry);
+        // You can perform additional actions after deletion if needed.
+        showEditForm = false;
+    }
+
+}
