@@ -15,7 +15,7 @@ else
 }
 
 @code {
-   
+
     private bool showEditForm = false;
     private void ShowEditForm()
     {
@@ -42,6 +42,12 @@ else
 
     [Parameter]
     public Entry EditEntry { get; set; }
+
+    public UpdateButton(Entry editEntry)
+    {
+        EditEntry = editEntry;
+    }
+
     [Parameter]
     public EventCallback<Entry> UpdateEntry { get; set; }
     private async void SaveChanges()
