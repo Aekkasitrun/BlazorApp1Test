@@ -24,11 +24,11 @@
                     @entry.Description
                 </td>
                 <td>
-                    @entry.Amount
+                    @entry.Amount 
                 </td>
                 <td>
                     <DeleteButton Entry="@entry" DeleteEntry="ReloadEntry" />
-                    <UpdateButton/>
+                    <UpdateButton EditEntry="@entry" UpdateEntry="ReloadEntry"/>
                 </td>
             </tr>
         }

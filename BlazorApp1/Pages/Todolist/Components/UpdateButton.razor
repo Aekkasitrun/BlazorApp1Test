@@ -1,17 +1,55 @@
 ﻿@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
 
-<button >Edit</button>
+@if (showEditForm)
+{
+    <!-- Your edit form code here -->
+    <input type="text" @bind="EditEntry.Description" />
+    <input type="decimal" @bind="EditEntry.Amount" />
+    <button @onclick="SaveChanges">Save</button>
+    <button @onclick="CancelEdit">Cancel</button>
+}
+else
+{
+    <button @onclick="ShowEditForm">edit</button>
+}
 
 @code {
-    //[Parameter]
-    //public Entry Entry { get; set; }
-    //[Parameter]
-    //public EventCallback<Entry> DeleteEntry { get; set; }
-    //private async void OnDeleteEntry()
+   
+    private bool showEditForm = false;
+    private void ShowEditForm()
+    {
+        showEditForm = true;
+    }
+
+    //private async void SaveChanges()
     //{
-    //    await budgetBookService.DeleteEntry(Entry);
-    //    await DeleteEntry.InvokeAsync(Entry);
-    //    // You can perform additional actions after deletion if needed.
+    //    // Add your save logic here
+    //    // For example:
+    //    // Update your data model, call an API, etc.
+    //    await budgetBookService.AddOrUpdateEntry(editedEntry);
+    //    showEditForm = false;
     //}
+
+    private void CancelEdit()
+    {
+        // Add your cancel logic here if needed
+        // For example:
+        // Revert changes, reset form, etc.
+
+        showEditForm = false;
+    }
+
+    [Parameter]
+    public Entry EditEntry { get; set; }
+    [Parameter]
+    public EventCallback<Entry> UpdateEntry { get; set; }
+    private async void SaveChanges()
+    {
+        await budgetBookService.AddOrUpdateEntry(EditEntry);
+        await UpdateEntry.InvokeAsync(EditEntry);
+        // You can perform additional actions after deletion if needed.
+        showEditForm = false;
+    }
+
 }
