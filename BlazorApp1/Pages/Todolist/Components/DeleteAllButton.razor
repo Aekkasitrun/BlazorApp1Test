@@ -1,0 +1,56 @@
+﻿@using BudgetBook.Data
+@inject BudgetBookService budgetBookService
+@inject IJSRuntime JSRuntime
+
+<button class="bi bi-trash text-bg-danger" style="border: none; background-color: transparent; color: red;" @onclick="@OnDeleteEntry"></button>
+
+<div class="modal" tabindex="-1" role="dialog" id="confirmationModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@ModalTitle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="CloseModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to delete?.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @onclick="DeleteEntryConfirmed">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="CloseModal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Entry Entry { get; set; }
+    [Parameter] public string ModalTitle { get; set; } = "Delete Confirmation";
+
+    [Parameter] public EventCallback<Entry> DeleteEntry { get; set; }
+
+    private async Task OnDeleteEntry()
+    {
+        // Show the modal using JavaScript interop
+        await JSRuntime.InvokeVoidAsync("showModal", "confirmationModal");
+    }
+
+    private async Task DeleteEntryConfirmed()
+    {
+        // Call the delete method in your service
+        await budgetBookService.DeleteEntry(Entry);
+
+        // Invoke the DeleteEntry event to notify the parent component
+        await DeleteEntry.InvokeAsync(Entry);
+
+        // Hide the modal using JavaScript interop
+        await JSRuntime.InvokeVoidAsync("hideModal", "confirmationModal");
+    }
+
+    private async Task CloseModal()
+    {
+        // Hide the modal when the close button is clicked using JavaScript interop
+        await JSRuntime.InvokeVoidAsync("hideModal", "confirmationModal");
+    }
+}

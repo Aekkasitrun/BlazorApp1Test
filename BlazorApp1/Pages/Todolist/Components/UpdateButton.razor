@@ -5,7 +5,7 @@
 {
     <!-- Your edit form code here -->
     <input type="text" @bind="EditEntry.Description" />
-    <input type="decimal" @bind="EditEntry.Amount" />
+    @*<input type="decimal" @bind="EditEntry.Amount" />*@
     <button class="bi bi-save-fill" style="border: none; background-color: transparent; color: green" @onclick="SaveChanges"></button>
     <button class="bi bi-x-square" style="border: none; background-color: transparent;" @onclick="CancelEdit"></button>
 }

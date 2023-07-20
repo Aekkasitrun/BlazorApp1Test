@@ -7,41 +7,29 @@
 }
 else
 {
-    <table class="table table-striped table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Amount
-                </th>
-                <th>
-                    Options
-                </th>
-            </tr>
-        </thead>
 
-        <tbody>
-            @foreach (Entry entry in allEntries)
-            {
-                <tr>
-                    <td>
-                        @entry.Description
-                    </td>
-                    <td>
-                        @entry.Amount
-                    </td>
-                    <td>
-                        <UpdateButton EditEntry="@entry" UpdateEntry="ReloadEntry" />
-                        <DeleteButton Entry="@entry" DeleteEntry="ReloadEntry" />
-                    </td>
-                </tr>
-            }
+    @foreach (Entry entry in allEntries)
+    {
+        <div class="d-flex justify-content-center">
+            <div class="card w-100 ">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <!-- เพิ่ม justify-content-between ที่นี่ -->
+                        <div class="mr-auto p-2">
+                            @entry.Description
+                        </div>
+                        <div class="p-2">
+                            <UpdateButton EditEntry="@entry" UpdateEntry="ReloadEntry" />
+                            <DeleteButton Entry="@entry" DeleteEntry="ReloadEntry" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 
-        </tbody>
-
-    </table>
+    }
+    
 }
 
 

@@ -1,24 +1,26 @@
 ﻿@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
+@inject IJSRuntime JSRuntime
 
-<EditForm Model="newEntry" OnValidSubmit="CreateEntry">
+<EditForm Model="newEntry" OnValidSubmit="CreateEntry" >
     <DataAnnotationsValidator/>
-    <div class="row">
-        <div class="col">
-            <label class="control-label">Description</label>
+    <div class="d-flex justify-content-center mb-2">
+        <div class="w-100 ">
+            @*<label class="control-label">Description</label>*@
             <InputText class="form-control" @bind-Value="@newEntry.Description" />
             <ValidationMessage For="@(() => newEntry.Description)"/>
         </div>
-        <div class="col">
+        @*<div class="col">
             <label class="control-label">Amount</label>
             <input class="form-control" @bind="@newEntry.Amount" />
+        </div>*@ 
+        <div class="mx-2">
+            <button class="btn btn-primary " type="submit">Add</button>
         </div>
     </div>
-    <div class="row mt-2">
-        <div class="col">
-            <button class="btn btn-primary my-2" type="submit">Add</button>
-        </div>
-    </div>
+    
+       
+    
 </EditForm>
 
 @*<form>
@@ -45,5 +47,6 @@
     {
         await budgetBookService.AddEntry(newEntry);
         Console.WriteLine("add done");
+        await JSRuntime.InvokeVoidAsync("refreshPage");
     }
 }
