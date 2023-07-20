@@ -40,16 +40,14 @@ else
         showEditForm = false;
     }
 
-    [Parameter]
-    public Entry EditEntry { get; set; }
+    [Parameter] public Entry EditEntry { get; set; }
 
-    public UpdateButton(Entry editEntry)
-    {
-        EditEntry = editEntry;
-    }
+    //public UpdateButton(Entry editEntry)
+    //{
+    //    EditEntry = editEntry;
+    //}
 
-    [Parameter]
-    public EventCallback<Entry> UpdateEntry { get; set; }
+    [Parameter] public EventCallback<Entry> UpdateEntry { get; set; }
     private async void SaveChanges()
     {
         await budgetBookService.AddOrUpdateEntry(EditEntry);

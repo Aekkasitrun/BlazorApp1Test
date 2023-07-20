@@ -10,6 +10,7 @@
             try
             {
                 mockDb.Add(newEntry);
+                Console.WriteLine("Done");
 
             }
             catch (Exception)

@@ -1,7 +1,27 @@
 ﻿@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
 
-<form>
+<EditForm Model="newEntry" OnValidSubmit="CreateEntry">
+    <DataAnnotationsValidator/>
+    <div class="row">
+        <div class="col">
+            <label class="control-label">Description</label>
+            <InputText class="form-control" @bind-Value="@newEntry.Description" />
+            <ValidationMessage For="@(() => newEntry.Description)"/>
+        </div>
+        <div class="col">
+            <label class="control-label">Amount</label>
+            <input class="form-control" @bind="@newEntry.Amount" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <button class="btn btn-primary my-2" type="submit">Add</button>
+        </div>
+    </div>
+</EditForm>
+
+@*<form>
     <div class="row">
         <div class="col">
             <label class="control-label">Description</label>
@@ -17,12 +37,13 @@
             <button class="btn btn-primary my-2" @onclick="@CreateEntry">Add</button>
         </div>
     </div>
-</form>
+</form>*@
 
 @code {
     Entry newEntry = new Entry();
     protected async void CreateEntry()
     {
         await budgetBookService.AddEntry(newEntry);
+        Console.WriteLine("add done");
     }
 }
