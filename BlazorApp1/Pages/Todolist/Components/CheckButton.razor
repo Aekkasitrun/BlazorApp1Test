@@ -1,5 +1,19 @@
-﻿<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+﻿@using BudgetBook.Data
+@inject BudgetBookService budgetBookService
+
+<input class="form-check-input" type="checkbox" @bind="CheckBoxEntry.IsChecked" id="flexCheckDefault" />
 
 @code {
+    [Parameter] public Entry CheckBoxEntry { get; set; }
 
+    [Parameter] public EventCallback<Entry> UpdateCheckBoxEntry { get; set; }
+
+    //private async Task CheckList()
+    //{
+    //    await budgetBookService.AddOrUpdateEntry(CheckBoxEntry);
+    //    await UpdateCheckBoxEntry.InvokeAsync(CheckBoxEntry);
+
+    //    // You can perform additional actions after updating the CheckBoxEntry if needed.
+    //    Console.WriteLine("IsCheck = " + CheckBoxEntry.IsChecked);
+    //}
 }
