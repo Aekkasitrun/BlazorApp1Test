@@ -30,6 +30,7 @@
             {
                 // Assuming mockDb is a collection that supports Remove() method, otherwise, adjust accordingly.
                 mockDb.Remove(newEntry);
+                Console.WriteLine("Delete Done");
             }
             catch (Exception)
             {
@@ -82,6 +83,7 @@
                 {
                     // If the entry exists, update its properties with the new values.
                     existingEntry.IsChecked = entryToUpdate.IsChecked;
+                    
                     //existingEntry.Amount = entryToUpdate.Amount;
                     // Update other properties as needed.
                 }
@@ -89,6 +91,7 @@
                 {
                     // If the entry does not exist, add the new entry to the mockDb.
                     mockDb.Add(entryToUpdate);
+                    
                 }
             }
             catch (Exception)
