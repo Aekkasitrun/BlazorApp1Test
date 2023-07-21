@@ -71,5 +71,33 @@
             mockDb.Clear();
         }
 
+        public async Task<bool> AddOrUpdateCheckBoxEntry(Entry entryToUpdate)
+        {
+            try
+            {
+                // Check if the entry exists in the mockDb.
+                var existingEntry = mockDb.FirstOrDefault(e => e.IsChecked == entryToUpdate.IsChecked);
+
+                if (existingEntry != null)
+                {
+                    // If the entry exists, update its properties with the new values.
+                    existingEntry.IsChecked = entryToUpdate.IsChecked;
+                    //existingEntry.Amount = entryToUpdate.Amount;
+                    // Update other properties as needed.
+                }
+                else
+                {
+                    // If the entry does not exist, add the new entry to the mockDb.
+                    mockDb.Add(entryToUpdate);
+                }
+            }
+            catch (Exception)
+            {
+                return await Task.FromResult(false);
+            }
+
+            return await Task.FromResult(true);
+        }
+
     }
 }

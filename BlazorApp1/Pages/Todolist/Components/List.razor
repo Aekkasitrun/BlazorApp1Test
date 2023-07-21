@@ -10,12 +10,12 @@ else
 
     @foreach (Entry entry in allEntries)
     {
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center ">
             <div class="card w-100 mb-1">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
-
+                    <div class="d-flex justify-content-between form-check">
                         <div class="mr-auto p-2">
+                            <CheckButton/>
                             @entry.Description
                         </div>
                         <div class="p-2">
