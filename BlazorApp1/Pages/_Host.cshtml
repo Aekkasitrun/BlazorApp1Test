@@ -17,6 +17,22 @@
     <link href="~/css/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="~/css/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+    <script>
+        function showModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.classList.add("show");
+            modal.style.display = "block";
+        }
+
+        function hideModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.classList.remove("show");
+            modal.style.display = "none";
+        }
+        function refreshPage() {
+            window.location.reload(true); // Reload the page from the server
+        }
+    </script>
 </head>
 <body>
     <component type="typeof(App)" render-mode="ServerPrerendered" />

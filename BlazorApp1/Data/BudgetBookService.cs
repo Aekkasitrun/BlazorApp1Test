@@ -10,6 +10,7 @@
             try
             {
                 mockDb.Add(newEntry);
+                Console.WriteLine("Done");
 
             }
             catch (Exception)
@@ -43,13 +44,13 @@
             try
             {
                 // Check if the entry exists in the mockDb.
-                var existingEntry = mockDb.FirstOrDefault(e => e.Amount == entryToUpdate.Amount);
+                var existingEntry = mockDb.FirstOrDefault(e => e.Description == entryToUpdate.Description);
 
                 if (existingEntry != null)
                 {
                     // If the entry exists, update its properties with the new values.
                     existingEntry.Description = entryToUpdate.Description;
-                    existingEntry.Amount = entryToUpdate.Amount;
+                    //existingEntry.Amount = entryToUpdate.Amount;
                     // Update other properties as needed.
                 }
                 else
@@ -63,6 +64,19 @@
                 return await Task.FromResult(false);
             }
 
+            return await Task.FromResult(true);
+        }
+        public async Task<bool> DeleteAllEntries()
+        {
+            try
+            {
+                // Assuming mockDb is a collection that supports Clear() method, otherwise, adjust accordingly.
+                mockDb.Clear();
+            }
+            catch (Exception)
+            {
+                return await Task.FromResult(false);
+            }
             return await Task.FromResult(true);
         }
 
