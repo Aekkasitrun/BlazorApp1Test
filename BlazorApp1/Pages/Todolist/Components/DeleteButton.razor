@@ -1,4 +1,4 @@
-﻿@using BudgetBook.Data
+﻿@*@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
 @inject IJSRuntime JSRuntime
 
@@ -52,5 +52,34 @@
     {
         // Hide the modal when the close button is clicked using JavaScript interop
         await JSRuntime.InvokeVoidAsync("hideModal", "confirmationModal");
+    }
+}*@
+
+
+@using BudgetBook.Data
+@inject BudgetBookService budgetBookService
+
+<button 
+    class="bi bi-trash text-bg-danger" 
+    style="border: none; background-color: transparent; color: red;" 
+    @onclick="@OnDeleteEntry">
+</button>
+
+@code {
+    [Parameter]
+    public Entry Entry { get; set; }
+
+    //public DeleteButton(Entry entry)
+    //{
+    //    Entry = entry;
+    //}
+
+    [Parameter]
+    public EventCallback<Entry> DeleteEntry { get; set; }
+    private async void OnDeleteEntry()
+    {
+        await budgetBookService.DeleteEntry(Entry);
+        await DeleteEntry.InvokeAsync(Entry);
+        // You can perform additional actions after deletion if needed.
     }
 }
