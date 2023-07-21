@@ -7,5 +7,6 @@ namespace BudgetBook.Data
         //public int Id { get; set; }
         [Required (ErrorMessage ="กรุณาเพิ่มรายการ")] public string Description { get; set; }
         //public double Amount { get; set; }
+        public bool IsChecked { get; set; }
     }
 }
