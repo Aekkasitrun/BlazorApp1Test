@@ -1,17 +1,62 @@
 ﻿@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
+@inject IJSRuntime JSRuntime
 
-<button @onclick="@OnDeleteEntry">clear</button>
+<button class="mt-2" @onclick="OnDeleteAllEntry">Clear</button>
+
+<div class="modal" tabindex="-1" role="dialog" id="confirmationModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="CloseModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete all entries?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @onclick="DeleteAllEntriesConfirmed">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="CloseModal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
     [Parameter]
     public Entry Entry { get; set; }
     [Parameter]
     public EventCallback<Entry> DeleteAllEntries { get; set; }
-    private  void OnDeleteEntry()
+    //private void OnDeleteEntry()
+    //{
+    //    budgetBookService.DeleteAllEntries();
+    //    DeleteAllEntries.InvokeAsync(Entry);
+    //    // You can perform additional actions after deletion if needed.
+    //}
+
+    private async Task OnDeleteAllEntry()
     {
-        budgetBookService.DeleteAllEntries();
-         DeleteAllEntries.InvokeAsync(Entry);
-        // You can perform additional actions after deletion if needed.
+        // Show the modal using JavaScript interop
+        await JSRuntime.InvokeVoidAsync("showModal", "confirmationModal");
+    }
+
+    private void DeleteAllEntriesConfirmed()
+    {
+        // Call the delete method in your service
+         budgetBookService.DeleteAllEntries();
+
+        // Invoke the DeleteEntry event to notify the parent component
+          DeleteAllEntries.InvokeAsync(Entry);
+
+        // Hide the modal using JavaScript interop
+          JSRuntime.InvokeVoidAsync("hideModal", "confirmationModal");
+    }
+
+    private async Task CloseModal()
+    {
+        // Hide the modal when the close button is clicked using JavaScript interop
+        await JSRuntime.InvokeVoidAsync("hideModal", "confirmationModal");
     }
 }
