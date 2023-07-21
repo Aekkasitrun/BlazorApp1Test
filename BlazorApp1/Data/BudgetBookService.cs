@@ -10,7 +10,6 @@
             try
             {
                 mockDb.Add(newEntry);
-                Console.WriteLine("Done");
 
             }
             catch (Exception)
@@ -66,18 +65,10 @@
 
             return await Task.FromResult(true);
         }
-        public async Task<bool> DeleteAllEntries()
+        public void DeleteAllEntries()
         {
-            try
-            {
-                // Assuming mockDb is a collection that supports Clear() method, otherwise, adjust accordingly.
-                mockDb.Clear();
-            }
-            catch (Exception)
-            {
-                return await Task.FromResult(false);
-            }
-            return await Task.FromResult(true);
+            // Assuming mockDb is a collection that supports Clear() method, otherwise, adjust accordingly.
+            mockDb.Clear();
         }
 
     }

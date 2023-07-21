@@ -46,7 +46,7 @@
     protected async void CreateEntry()
     {
         await budgetBookService.AddEntry(newEntry);
-        Console.WriteLine("add done");
+        Console.WriteLine("add newEntry =" + newEntry.Description);
         await JSRuntime.InvokeVoidAsync("refreshPage");
     }
 }
