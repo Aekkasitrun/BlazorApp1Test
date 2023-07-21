@@ -1,30 +1,19 @@
 ﻿@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
 
-<input class="form-check-input" type="checkbox" id="flexCheckDefault" checked autocomplete="off"/>
+<input class="form-check-input" type="checkbox" @bind="CheckBoxEntry.IsChecked" id="flexCheckDefault" />
 
 @code {
-    public bool CheckBox { get; set; } = false;
-
     [Parameter] public Entry CheckBoxEntry { get; set; }
-
-
-
-    //public UpdateButton(Entry editEntry)
-    //{
-    //    EditEntry = editEntry;
-    //}
 
     [Parameter] public EventCallback<Entry> UpdateCheckBoxEntry { get; set; }
 
+    //private async Task CheckList()
+    //{
+    //    await budgetBookService.AddOrUpdateEntry(CheckBoxEntry);
+    //    await UpdateCheckBoxEntry.InvokeAsync(CheckBoxEntry);
 
-    private async void CheckList()
-    {
-        //CheckBoxEntry.IsChecked = CheckBox;
-        await budgetBookService.AddOrUpdateCheckBoxEntry(CheckBoxEntry);
-        await UpdateCheckBoxEntry.InvokeAsync(CheckBoxEntry);
-        Console.WriteLine("Update CheckBox.");
-        // You can perform additional actions after deletion if needed.
-        
-    }
+    //    // You can perform additional actions after updating the CheckBoxEntry if needed.
+    //    Console.WriteLine("IsCheck = " + CheckBoxEntry.IsChecked);
+    //}
 }
