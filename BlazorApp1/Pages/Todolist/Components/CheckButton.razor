@@ -1,7 +1,7 @@
 ﻿@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
 
-<input class="form-check-input" type="checkbox" @bind="CheckBoxEntry.IsChecked" id="flexCheckDefault" />
+<input class="form-check-input" type="checkbox" @bind-value="CheckBoxEntry.IsChecked" id="flexCheckDefault" />
 
 @code {
     [Parameter] public Entry CheckBoxEntry { get; set; }
