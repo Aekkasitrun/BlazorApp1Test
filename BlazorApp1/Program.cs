@@ -1,5 +1,7 @@
 using BlazorApp1;
 using BlazorApp1.Data;
+using BlazorApp1.Helpers;
+using BlazorApp1.Repository;
 using BudgetBook.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -13,6 +15,8 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<BudgetBookService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHttpClient<IHttpService, HttpService>();
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 
 var app = builder.Build();
 

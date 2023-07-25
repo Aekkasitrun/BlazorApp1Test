@@ -4,7 +4,7 @@
 @if (showEditForm)
 {
     <!-- Your edit form code here -->
-    <input type="text" @bind="EditEntry.Description" />
+    <input type="text" @bind="EditTodo.Description" />
     @*<input type="decimal" @bind="EditEntry.Amount" />*@
     <button class="bi bi-save-fill" style="border: none; background-color: transparent; color: green" @onclick="SaveChanges"></button>
     <button class="bi bi-x-square" style="border: none; background-color: transparent;" @onclick="CancelEdit"></button>
@@ -40,18 +40,18 @@ else
         showEditForm = false;
     }
 
-    [Parameter] public Entry EditEntry { get; set; }
+    [Parameter] public Todo EditTodo { get; set; }
 
     //public UpdateButton(Entry editEntry)
     //{
     //    EditEntry = editEntry;
     //}
 
-    [Parameter] public EventCallback<Entry> UpdateEntry { get; set; }
+    [Parameter] public EventCallback<Todo> UpdateTodo { get; set; }
     private async void SaveChanges()
     {
-        await budgetBookService.AddOrUpdateEntry(EditEntry);
-        await UpdateEntry.InvokeAsync(EditEntry);
+        await budgetBookService.AddOrUpdateEntry(EditTodo);
+        await UpdateTodo.InvokeAsync(EditTodo);
         // You can perform additional actions after deletion if needed.
         showEditForm = false;
     }

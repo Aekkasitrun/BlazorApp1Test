@@ -15,7 +15,7 @@ namespace BlazorApp1
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Entry> Entries { get; set; }
+        public DbSet<Todo> Entries { get; set; }
 
     }
 }

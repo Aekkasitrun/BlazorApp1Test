@@ -67,7 +67,7 @@
 
 @code {
     [Parameter]
-    public Entry Entry { get; set; }
+    public Todo Todoes { get; set; }
 
     //public DeleteButton(Entry entry)
     //{
@@ -75,11 +75,11 @@
     //}
 
     [Parameter]
-    public EventCallback<Entry> DeleteEntry { get; set; }
+    public EventCallback<Todo> DeleteEntry { get; set; }
     private async void OnDeleteEntry()
     {
-        await budgetBookService.DeleteEntry(Entry);
-        await DeleteEntry.InvokeAsync(Entry);
+        await budgetBookService.DeleteEntry(Todoes);
+        await DeleteEntry.InvokeAsync(Todoes);
         // You can perform additional actions after deletion if needed.
     }
 }

@@ -8,19 +8,19 @@
 else
 {
 
-    @foreach (Entry entry in allEntries)
+    @foreach (Todo todo in allEntries)
     {
         <div class="d-flex justify-content-center ">
             <div class="card w-100 mb-1">
                 <div class="card-body">
                     <div class="d-flex justify-content-between form-check">
                         <div class="mr-auto p-2">
-                            <CheckButton CheckBoxEntry="@entry" UpdateCheckBoxEntry="ReloadEntry"/>
-                            @entry.Description
+                            <CheckButton CheckBoxEntry="@todo" UpdateCheckBoxEntry="ReloadEntry" />
+                            @todo.Description
                         </div>
                         <div class="p-2">
-                            <UpdateButton EditEntry="@entry" UpdateEntry="ReloadEntry" />
-                            <DeleteButton Entry="@entry" DeleteEntry="ReloadEntry" />
+                            <UpdateButton EditEntry="@todo" UpdateEntry="ReloadEntry" />
+                            <DeleteButton Entry="@todo" DeleteEntry="ReloadEntry" />
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ else
 
 
 @code {
-    List<Entry> allEntries = new List<Entry>();
+    List<Todo> allEntries = new List<Todo>();
     protected async override Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();

@@ -26,9 +26,9 @@
 
 @code {
     [Parameter]
-    public Entry Entry { get; set; }
+    public Todo Entry { get; set; }
     [Parameter]
-    public EventCallback<Entry> DeleteAllEntries { get; set; }
+    public EventCallback<Todo> DeleteAllEntries { get; set; }
     //private void OnDeleteEntry()
     //{
     //    budgetBookService.DeleteAllEntries();

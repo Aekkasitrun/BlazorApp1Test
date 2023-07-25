@@ -1,14 +1,16 @@
 ﻿@using BudgetBook.Data
 @inject BudgetBookService budgetBookService
 @inject IJSRuntime JSRuntime
+@inject BlazorApp1.Repository.ITodoRepository todoRepository
+@inject NavigationManager navigationManager
 
-<EditForm Model="newEntry" OnValidSubmit="CreateEntry" >
+<EditForm Model="newTodo" OnValidSubmit="CreateEntry">
     <DataAnnotationsValidator/>
     <div class="d-flex justify-content-center mb-2">
         <div class="w-100 ">
             @*<label class="control-label">Description</label>*@
-            <InputText class="form-control" @bind-Value="@newEntry.Description" />
-            <ValidationMessage For="@(() => newEntry.Description)"/>
+            <InputText class="form-control" @bind-Value="@newTodo.Description" />
+            <ValidationMessage For="@(() => newTodo.Description)" />
         </div>
         @*<div class="col">
             <label class="control-label">Amount</label>
@@ -22,6 +24,27 @@
        
     
 </EditForm>
+
+@code {
+    Todo newTodo = new Todo();
+    protected async Task CreateEntry()
+    {
+        //await budgetBookService.AddEntry(newTodo);
+        //Console.WriteLine("add newEntry =" + newTodo.Description);
+        //await JSRuntime.InvokeVoidAsync("refreshPage");
+        try
+        {
+            await todoRepository.CreateTodo(newTodo);
+            navigationManager.NavigateTo("todo");
+        }
+        catch (Exception ex)
+        {
+            //...
+            Console.WriteLine("newTodo = " + newTodo.Description);
+            Console.WriteLine("Error = " + ex.Message);
+        }
+    }
+}
 
 @*<form>
     <div class="row">
@@ -41,12 +64,13 @@
     </div>
 </form>*@
 
-@code {
-    Entry newEntry = new Entry();
+@*@code {
+    Todo newTodo = new Todo();
     protected async void CreateEntry()
     {
-        await budgetBookService.AddEntry(newEntry);
-        Console.WriteLine("add newEntry =" + newEntry.Description);
+        await budgetBookService.AddEntry(newTodo);
+        Console.WriteLine("add newEntry =" + newTodo.Description);
         await JSRuntime.InvokeVoidAsync("refreshPage");
     }
-}
+}*@
+

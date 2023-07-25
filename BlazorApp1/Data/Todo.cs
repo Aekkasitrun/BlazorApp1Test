@@ -2,7 +2,7 @@
 
 namespace BudgetBook.Data
 {
-    public class Entry
+    public class Todo
     {
         public int Id { get; set; }
         [Required (ErrorMessage ="กรุณาเพิ่มรายการ")] public string? Description { get; set; }

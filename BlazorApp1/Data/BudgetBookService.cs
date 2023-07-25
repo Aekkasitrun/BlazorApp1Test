@@ -1,11 +1,12 @@
-﻿namespace BudgetBook.Data
+﻿
+namespace BudgetBook.Data
 {
     public class BudgetBookService
     {
         public int MyProperty { get; set; }
-        private static List<Entry> mockDb = new List<Entry>();
+        private static List<Todo> mockDb = new List<Todo>();
 
-        public async Task<bool> AddEntry(Entry newEntry)
+        public async Task<bool> AddEntry(Todo newEntry)
         {
             try
             {
@@ -19,12 +20,12 @@
             }
             return await Task.FromResult(true);
         }
-        public async Task<List<Entry>> GetAllEntries()
+        public async Task<List<Todo>> GetAllEntries()
         {
             return await Task.FromResult(mockDb);
         }
 
-        public async Task<bool> DeleteEntry(Entry newEntry)
+        public async Task<bool> DeleteEntry(Todo newEntry)
         {
             try
             {
@@ -38,7 +39,7 @@
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> AddOrUpdateEntry(Entry entryToUpdate)
+        public async Task<bool> AddOrUpdateEntry(Todo entryToUpdate)
         {
             try
             {
@@ -71,7 +72,7 @@
             mockDb.Clear();
         }
 
-        public async Task<bool> AddOrUpdateCheckBoxEntry(Entry entryToUpdate)
+        public async Task<bool> AddOrUpdateCheckBoxEntry(Todo entryToUpdate)
         {
             try
             {
